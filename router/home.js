@@ -4,7 +4,7 @@ const router = express.Router();
 
 // init route
 router.use("/", (req, res) => {
-    res.json({ test: "home route ok" });
+    res.json({ test: "acceuil route ok" });
 });
 
 // export router
