@@ -7,5 +7,6 @@
 # variable
 .env
 
-# connect
-connection.js
+# vscode
+.vscode
+
