@@ -1,0 +1,11 @@
+# modules
+/node_modules
+
+# misc
+/misc_files
+
+# variable
+.env
+
+# connect
+connection.js
