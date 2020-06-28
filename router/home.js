@@ -3,10 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 // init route
-router.use('/',(req,res)=>{
-    res.json({test : "test ok"})
-})
-
+router.use("/", (req, res) => {
+    res.json({ test: "home route ok" });
+});
 
 // export router
 module.exports = router;
