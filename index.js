@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 // init port
-const port = process.env.FOLIO_PORT || 3000;
+const port = process.env.FOLIO_PORT || 5000;
 
 // test
 /* app.get("/api", (req, res) => {
