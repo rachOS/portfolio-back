@@ -5,6 +5,7 @@ const router = express.Router();
 // import connection
 const connection = require("../connection");
 
+/* CREATE */
 // Create one project
 router.post("/", (req, res) => {
     const formData = req.body;
@@ -13,11 +14,12 @@ router.post("/", (req, res) => {
         if (err) {
             res.status(500).send("Impossible d'ajouter un projet");
         } else {
-            res.status(201).json(result);
+            res.status(201).json("Le projet a bien été crée");
         }
     });
 });
 
+/* READ */
 // Get all projects
 router.get("/", (req, res) => {
     const sql = "SELECT * FROM project";
@@ -37,14 +39,15 @@ router.get("/:idProject", (req, res) => {
     const sql = "SELECT * FROM project WHERE id = ? ";
     connection.query(sql, idProject, (err, result) => {
         if (err) {
-            res.status(500).send(err);
+            res.status(500).send("Impossible de trouver le projet");
         } else {
             res.status(200).json(result);
         }
     });
 });
 
-// Modify one project
+/* UPDATE */
+// Edit one project
 router.put("/:idProject", (req, res) => {
     const formData = req.body;
     const { idProject } = req.params;
@@ -53,19 +56,19 @@ router.put("/:idProject", (req, res) => {
         if (err) {
             res.status(500).send("Impossible de modifier un projet");
         } else {
-            res.status(201).send(result);
+            res.status(201).send("Le projet a bien été édité");
         }
     });
 });
 
+/* DELETE */
 // Delete one project
 router.delete("/:idProject", (req, res) => {
     const { idProject } = req.params;
     const sql = "DELETE FROM project WHERE id = ?";
     connection.query(sql, [idProject], (err, result) => {
         if (err) {
-            // res.status(500).send("Impossible d'effacer un projet");
-            res.status(500).send(err);
+            res.status(500).send("Impossible d'effacer un projet");
         } else {
             res.status(201).send("Le projet a bien été effacé");
         }
