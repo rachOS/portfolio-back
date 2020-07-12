@@ -4,7 +4,6 @@ const router = express.Router();
 
 // import connection
 const connection = require("../connection");
-const { route } = require("./project");
 
 /* CREATE */
 // Create one stack

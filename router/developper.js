@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../connection");
-const { route } = require("./project");
 
 /* CREATE */
 // Create one developper

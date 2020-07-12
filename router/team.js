@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../connection");
-const { route } = require("./project");
 
 /* Create */
 // Create one team
