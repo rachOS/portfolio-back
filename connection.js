@@ -10,10 +10,10 @@ if(result.error){
 }
 
 const connection = mysql.createConnection({
-    host: process.env.FOLIO_HOST,
-    user: process.env.FOLIO_USER,
-    password: process.env.FOLIO_PASSWORD,
-    database: process.env.FOLIO_DB,
+    host: process.env.DOKKU_HOST,
+    user: process.env.DOKKU_USER,
+    password: process.env.DOKKU_PASSWORD,
+    database: process.env.DOKKU_DATABASE,
 });
 
 // export
