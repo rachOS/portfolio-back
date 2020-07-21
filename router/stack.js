@@ -28,7 +28,8 @@ router.get("/", (req, res) => {
     const sql = "SELECT * FROM stack";
     connection.query(sql, (err, result) => {
         if (err) {
-            res.status(500).send("Impossile d'afficher la liste des langages");
+            // res.status(500).send("Impossile d'afficher la liste des langages");
+            res.status(500).send(err);
         } else {
             res.status(200).json(result);
         }
