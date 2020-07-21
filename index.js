@@ -4,7 +4,6 @@ const app = express();
 const router = require("./router/router");
 const dotenv = require("dotenv");
 const cors = require("cors");
-dotenv.config()
 
 // init parser
 app.use(express.json());
