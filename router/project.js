@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
     const sql = "INSERT INTO project SET ?";
     connection.query(sql, [formData], (err, result) => {
         if (err) {
-            res.status(500).send("Impossible d'ajouter un projet");
+            res.status(500).send(err);
         } else {
             res.status(201).json("Le projet a bien été crée");
         }

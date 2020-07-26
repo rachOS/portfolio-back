@@ -5,6 +5,9 @@ const router = require("./router/router");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+// Cors
+app.use(cors())
+
 // init parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 // init port
-const port = process.env.PORT || 5050;
+const port = process.env.PORT || 8080;
 
 // test
 /* app.get("/api", (req, res) => {
