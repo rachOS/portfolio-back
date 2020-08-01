@@ -37,11 +37,28 @@ router.get("/", (req, res) => {
 router.get("/:idProject", (req, res) => {
     const { idProject } = req.params;
     const sql = "SELECT * FROM project WHERE id = ? ";
-    connection.query(sql, idProject, (err, result) => {
+    connection.query(sql, [idProject], (err, result) => {
         if (err) {
             res.status(500).send("Impossible de trouver le projet");
         } else {
             res.status(200).json(result);
+        }
+    });
+});
+
+// I want the project's screenshot
+router.get("/:idProject/screenshot", (req, res) => {
+    const { idProject } = req.params;
+    const sql = "SELECT screenshot FROM project WHERE id = ?";
+    connection.query(sql, [idProject], (err, results) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message,
+                sql: err.sql,
+            });
+        } else {
+            const convertResults = Buffer(results[0].screenshot).toString('base64')
+            res.status(200).send(convertResults);
         }
     });
 });
