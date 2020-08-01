@@ -57,7 +57,7 @@ router.get("/:idProject/screenshot", (req, res) => {
                 sql: err.sql,
             });
         } else {
-            const convertResults = Buffer(results[0].screenshot).toString('base64')
+            const convertResults = Buffer.from(results[0].screenshot).toString('base64')
             res.status(200).send(convertResults);
         }
     });
