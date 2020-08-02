@@ -57,8 +57,16 @@ router.get("/:idProject/screenshot", (req, res) => {
                 sql: err.sql,
             });
         } else {
-            const convertResults = Buffer.from(results[0].screenshot).toString('base64')
-            res.status(200).send(convertResults);
+            // const convertResults = Buffer.from(results[0].screenshot).toString('base64')
+            // const blob = results[0].screenshot;
+            // const reader = new FileReader();
+            // reader.readAsDataURL(blob);
+            // reader.onloadend = () => {
+            //     const base64data = reader.result;
+            //     console.log("64", base64data);
+            // };
+            // res.status(200).send(reader.readAsDataURL(blob));
+            res.status(200).json(results);
         }
     });
 });
