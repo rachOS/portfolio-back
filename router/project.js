@@ -63,34 +63,10 @@ router.get("/:idProject", (req, res) => {
         }
     });
 });
-
-// I want the project's screenshot
-/* router.get("/:idProject/screenshot", (req, res) => {
-    const { idProject } = req.params;
-    const sql = "SELECT screenshot FROM project WHERE id = ?";
-    connection.query(sql, [idProject], (err, results) => {
-        if (err) {
-            res.status(500).json({
-                error: err.message,
-                sql: err.sql,
-            });
-        } else {
-            // const convertResults = Buffer.from(results[0].screenshot).toString('base64')
-            // const blob = results[0].screenshot;
-            // const reader = new FileReader();
-            // reader.readAsDataURL(blob);
-            // reader.onloadend = () => {
-            //     const base64data = reader.result;
-            //     console.log("64", base64data);
-            // };
-            // res.status(200).send(reader.readAsDataURL(blob));
-            res.status(200).json(results);
-        }
-    });
-}); */
+// I want the project's description
 
 // I want the total of developpers for one project
-router.get("/:idProject/developpers", (req, res) => {
+router.get("/:idProject/total-developpers", (req, res) => {
     const { idProject } = req.params;
     const sql =
         " \
@@ -117,6 +93,55 @@ router.get("/:idProject/developpers", (req, res) => {
     });
 });
 
+// I want all devs infos for one project
+router.get("/:idProject/developpers-infos", (req, res) => {
+    const { idProject } = req.params;
+    const sql =
+        " \
+    SELECT d.* FROM developper AS d \
+    LEFT JOIN developper_project AS dp \
+    ON d.id = dp.developper_id \
+    LEFT JOIN project AS p \
+    ON p.id = dp.project_id \
+    WHERE p.id = ? \
+    ORDER BY d.lastname , d.firstname  \
+    ";
+    connection.query(sql, [idProject], (err, results) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message,
+                sql: err.sql,
+            });
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
+
+// I want all stacks for one project
+router.get("/:idProject/stacks", (req, res) => {
+    const { idProject } = req.params;
+    const sql =
+        " \
+    SELECT s.*, p.name AS `project` \
+    FROM stack AS s \
+    RIGHT JOIN stack_project AS sp \
+    ON s.id  = sp.stack_id \
+    RIGHT JOIN project AS p \
+    ON p.id = sp.project_id \
+    WHERE p.id = ? \
+    ";
+    connection.query(sql, [idProject], (err, results) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message,
+                sql: err.sql,
+            });
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
 /* UPDATE */
 // Edit one project
 router.put("/:idProject", (req, res) => {
