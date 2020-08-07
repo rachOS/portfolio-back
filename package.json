@@ -16,11 +16,11 @@
     "express-router": "0.0.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4"
   },
   "devDependencies": {
-    "eslint": "^7.4.0",
+    "eslint": "^7.6.0",
     "prettier": "^2.0.5"
   },
   "repository": {

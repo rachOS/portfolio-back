@@ -71,9 +71,7 @@ router.get("/:idProject/description", (req, res) => {
         if (err) {
             res.status(500).send("Impossible de trouver le projet");
         } else {
-            const convertBufferToString = Buffer.from(
-                result[0].description
-            ).toString("utf-8");
+            const convertBufferToString = Buffer.from(result[0].description);
             res.status(200).send(convertBufferToString);
         }
     });
