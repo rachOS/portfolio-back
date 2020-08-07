@@ -154,6 +154,32 @@ router.get("/:idProject/stacks", (req, res) => {
         }
     });
 });
+
+// I want all tools for one project
+router.get("/:idProject/tools", (req, res) => {
+    const { idProject } = req.params;
+    const sql =
+        "\
+    SELECT t.* FROM tool AS t \
+    JOIN project_tool AS pt \
+    ON t.id = pt.tool_id \
+    JOIN project AS p \
+    ON p.id = pt.project_id \
+    WHERE p.id = ? \
+    GROUP BY t.id , p.name \
+    ORDER BY t.name \
+    ";
+    connection.query(sql, [idProject], (err, results) => {
+        if (err) {
+            res.status(500).json({
+                error: err.message,
+                sql: err.sql,
+            });
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
 /* UPDATE */
 // Edit one project
 router.put("/:idProject", (req, res) => {
