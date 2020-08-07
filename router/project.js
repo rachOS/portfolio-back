@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
 });
 
 /* READ */
-// i want to sort all project by end date
+// i want to sort all project by end date or geta ll projects
 router.get("/", (req, res) => {
     const { sort } = req.query;
     if (sort) {
@@ -64,6 +64,18 @@ router.get("/:idProject", (req, res) => {
     });
 });
 // I want the project's description
+router.get("/:idProject/description", (req, res) => {
+    const { idProject } = req.params;
+    const sql = "SELECT p.description FROM project AS p WHERE id = ? ";
+    connection.query(sql, [idProject], (err, result) => {
+        if (err) {
+            res.status(500).send("Impossible de trouver le projet");
+        } else {
+            const convertBufferToString = Buffer.from(result[0].description);
+            res.status(200).send(convertBufferToString);
+        }
+    });
+});
 
 // I want the total of developpers for one project
 router.get("/:idProject/total-developpers", (req, res) => {
