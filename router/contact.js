@@ -6,7 +6,6 @@ const dotenv = require("dotenv").config();
 // create reusable transporter object using the default SMTP transport
 
 const transporter = nodemailer.createTransport({
-    debug: true,
     name: "e-nautia",
     port: 587,
     secure: false,
@@ -19,20 +18,23 @@ const transporter = nodemailer.createTransport({
 
 transporter.verify(function (error, success) {
     if (error) {
-        console.log("ERROR", error);
+        console.log(error);
     } else {
-        console.log("Server is ready to take our messages");
+        console.log(success);
     }
 });
 
 router.post("/", (req, res) => {
-    const { from, subject, text } = req.body;
+    const { user_email, subject, text } = req.body;
 
     const mailData = {
-        from: from,
+        from: process.env.EMAIL,
         to: process.env.EMAIL,
         subject: subject,
-        text: text,
+        html: `<p>mail from:
+        <a type="email" href=${`mailto:${user_email}`}> ${user_email}</a>
+        </p> \
+        <p>${text}</p>`,
     };
 
     transporter.sendMail(mailData, (err, info) => {
