@@ -25,13 +25,13 @@ transporter.verify(function (error, success) {
 });
 
 router.post("/", (req, res) => {
-    const { user_email, subject, text } = req.body;
+    const { fullname, user_email, subject, text } = req.body;
 
     const mailData = {
         from: process.env.EMAIL,
         to: process.env.EMAIL,
         subject: subject,
-        html: `<p>mail from:
+        html: `<p>mail from: ${fullname}
         <a type="email" href=${`mailto:${user_email}`}> ${user_email}</a>
         </p> \
         <p>${text}</p>`,
