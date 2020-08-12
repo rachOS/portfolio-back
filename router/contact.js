@@ -5,7 +5,7 @@ const dotenv = require("dotenv").config();
 
 // create reusable transporter object using the default SMTP transport
 
-const transporter = nodemailer.createTransport({
+/* const transporter = nodemailer.createTransport({
     name: "e-nautia",
     port: 587,
     secure: false,
@@ -45,6 +45,6 @@ router.post("/", (req, res) => {
         }
     });
     transporter.close();
-});
+}); */
 
 module.exports = router;

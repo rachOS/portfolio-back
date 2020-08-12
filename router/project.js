@@ -32,8 +32,9 @@ router.get("/", (req, res) => {
                     error: err.message,
                     sql: err.sql,
                 });
+            } else {
+                return res.status(200).json(result);
             }
-            return res.status(200).json(result);
         });
     } else {
         // i want all projects
